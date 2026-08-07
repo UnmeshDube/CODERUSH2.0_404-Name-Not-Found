@@ -1347,3 +1347,523 @@ footer {
     border-color: var(--navy);
 }
 
+/* =========================================
+   COMPREHENSIVE MOBILE RESPONSIVE CSS
+   ========================================= */
+
+/* ── Tablet (≤ 1024px) ─────────────────── */
+@media (max-width: 1024px) {
+    .portal-hero {
+        min-height: 500px;
+        height: 70vh;
+        padding-bottom: 30px;
+    }
+
+    .portal-hero-text h1 {
+        font-size: 2.8rem;
+    }
+
+    .portal-hero-text p {
+        font-size: 1.1rem;
+    }
+
+    .quick-services-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-stats {
+        justify-content: center;
+    }
+}
+
+/* ── Mobile (≤ 768px) ──────────────────── */
+@media (max-width: 768px) {
+    /* ── Navbar Mobile Hamburger ── */
+    .nav-links {
+        display: none !important;
+    }
+
+    .mobile-menu-btn {
+        display: block !important;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* When mobile menu is toggled open via JS */
+    .nav-links[style*="display: flex"] {
+        display: flex !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        background: rgba(10, 37, 64, 0.98) !important;
+        padding: 80px 30px 30px !important;
+        z-index: 9999 !important;
+        gap: 5px !important;
+        overflow-y: auto !important;
+        box-shadow: none !important;
+    }
+
+    .nav-links[style*="display: flex"] a {
+        color: white !important;
+        font-size: 1.15rem !important;
+        padding: 14px 0 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+        text-shadow: none !important;
+    }
+
+    .nav-links[style*="display: flex"] .btn-primary {
+        margin-top: 15px !important;
+        text-align: center !important;
+        border-radius: 8px !important;
+    }
+
+    .nav-container {
+        height: 55px;
+    }
+
+    .logo-text {
+        font-size: 1.1rem !important;
+    }
+
+    .logo-img {
+        height: 30px !important;
+    }
+
+    /* ── Hero Section Mobile ── */
+    .portal-hero {
+        min-height: 420px;
+        height: auto;
+        padding: 100px 15px 40px;
+    }
+
+    .portal-hero-text h1 {
+        font-size: 1.85rem;
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+
+    .portal-hero-text p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+
+    .motto-marquee-portal {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    /* ── Search Bar Mobile ── */
+    .portal-search-box {
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 12px;
+        gap: 10px;
+        max-width: 100%;
+    }
+
+    .portal-search-box input {
+        font-size: 0.95rem;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .search-icon {
+        display: none;
+    }
+
+    .mic-btn {
+        margin-right: 0;
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+
+    .btn-search {
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        font-size: 1rem;
+    }
+
+    /* ── Quick Service Cards Mobile ── */
+    .quick-services-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 20px auto;
+    }
+
+    .quick-service-card {
+        padding: 20px 12px;
+    }
+
+    .quick-service-card h3 {
+        font-size: 0.95rem;
+    }
+
+    .quick-service-card p {
+        font-size: 0.8rem;
+    }
+
+    .qs-icon {
+        font-size: 2rem;
+    }
+
+    /* ── Services Grid Mobile ── */
+    .portal-services {
+        padding: 30px 0 40px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .service-category {
+        padding: 20px;
+    }
+
+    /* ── Section Headers Mobile ── */
+    .section-header {
+        margin-bottom: 25px;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    /* ── Footer Mobile ── */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    footer {
+        padding: 35px 0 15px;
+    }
+
+    /* ── Profile / Tracking Dashboard Mobile ── */
+    .profile-header-container {
+        padding: 70px 0 40px;
+    }
+
+    .profile-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-info .avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+
+    .profile-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .profile-stats {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .stat-box {
+        padding: 12px 15px;
+        min-width: 90px;
+        flex: 1;
+    }
+
+    .stat-box h3 {
+        font-size: 1.5rem;
+    }
+
+    .stat-box p {
+        font-size: 0.7rem;
+    }
+
+    .tracking-toolbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .tracking-toolbar h2 {
+        font-size: 1.1rem;
+    }
+
+    /* ── Complaint Cards Mobile ── */
+    .card-header {
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 15px;
+        align-items: flex-start;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .issue-title {
+        font-size: 1.1rem;
+    }
+
+    .issue-meta {
+        flex-direction: column;
+        gap: 8px;
+        font-size: 0.8rem;
+    }
+
+    .tracking-timeline {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .timeline-step::after {
+        display: none;
+    }
+
+    .timeline-step {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: left;
+    }
+
+    .step-icon {
+        margin: 0;
+        min-width: 36px;
+        width: 36px;
+        height: 36px;
+    }
+
+    /* ── Report Form Mobile ── */
+    .report-container {
+        margin: 70px auto 20px !important;
+        padding: 20px 15px !important;
+        border-radius: 8px !important;
+        max-width: 100% !important;
+    }
+
+    .report-container h1 {
+        font-size: 1.4rem !important;
+    }
+
+    /* ── About Page Mobile ── */
+    .about-header {
+        padding: 70px 15px 30px !important;
+    }
+
+    .about-header h1 {
+        font-size: 1.8rem !important;
+    }
+
+    .about-header p {
+        font-size: 1rem !important;
+    }
+
+    .content-container {
+        padding: 0 15px !important;
+    }
+
+    .content-container h2 {
+        font-size: 1.4rem !important;
+    }
+
+    .content-container h3 {
+        font-size: 1.2rem !important;
+    }
+
+    /* ── Buttons Mobile ── */
+    .btn-lg {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    /* ── Auth / Login Mobile ── */
+    .auth-container {
+        padding: 25px 20px !important;
+        border-radius: 14px !important;
+        max-width: 100% !important;
+    }
+
+    /* ── Motto Marquee ── */
+    .motto-marquee {
+        top: 55px;
+        font-size: 0.85rem;
+        padding: 6px 0;
+    }
+
+    /* ── Admin Portal Mobile ── */
+    .admin-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .admin-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    /* ── Voice AI Badge Mobile ── */
+    #ai-speech-badge,
+    [id*="ai-badge"],
+    [id*="speech-badge"] {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+}
+
+/* ── Small Mobile (≤ 480px) ────────────── */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    .portal-hero-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .portal-hero-text p {
+        font-size: 0.88rem;
+    }
+
+    .portal-hero {
+        padding: 80px 10px 25px;
+        min-height: 360px;
+    }
+
+    .quick-services-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .quick-service-card {
+        flex-direction: row;
+        text-align: left;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .quick-service-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .quick-service-card p {
+        display: none; /* hide descriptions on very small screens */
+    }
+
+    .qs-icon {
+        font-size: 1.6rem;
+        margin-bottom: 0;
+    }
+
+    .portal-search-box input {
+        font-size: 0.88rem;
+    }
+
+    .profile-stats {
+        flex-direction: column;
+    }
+
+    .stat-box {
+        flex: none;
+        width: 100%;
+    }
+
+    .report-container {
+        margin: 60px 8px 15px !important;
+        padding: 18px 12px !important;
+    }
+
+    .about-header h1 {
+        font-size: 1.5rem !important;
+    }
+
+    .content-section {
+        padding: 30px 0 !important;
+    }
+
+    footer {
+        padding: 25px 0 10px;
+    }
+
+    .footer-bottom {
+        font-size: 0.78rem;
+    }
+
+    /* ── Nav dropdown on mobile (full-screen) ── */
+    .nav-dropdown {
+        width: 100%;
+    }
+
+    .dropdown-menu {
+        position: static !important;
+        box-shadow: none !important;
+        background: rgba(255,255,255,0.05) !important;
+        border-radius: 0 !important;
+        margin-top: 0 !important;
+        padding: 0 !important;
+    }
+
+    .dropdown-menu a {
+        color: rgba(255,255,255,0.8) !important;
+        padding: 10px 20px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ── Touch-Friendly Enhancements ────────── */
+@media (pointer: coarse) {
+    .btn, .btn-primary, .btn-secondary, .btn-search,
+    .submit-btn, .location-btn, .mic-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .nav-links a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .portal-search-box input {
+        min-height: 44px;
+    }
+
+    /* Larger touch targets for form inputs */
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        min-height: 44px;
+        font-size: 16px; /* prevents iOS zoom */
+    }
+}
