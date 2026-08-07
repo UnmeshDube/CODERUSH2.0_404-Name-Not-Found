@@ -556,11 +556,29 @@ footer {
 }
 
 .footer-bottom {
-    text-align: center;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: #94a3b8;
     font-size: 0.9rem;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    text-align: left;
+}
+
+.footer-bottom p {
+    display: inline-block;
+    white-space: nowrap;
+    animation: footerMarquee 18s linear infinite;
+}
+
+@keyframes footerMarquee {
+    0% {
+        transform: translate3d(-50%, 0, 0);
+    }
+    100% {
+        transform: translate3d(100%, 0, 0);
+    }
 }
 
 /* Responsive */
