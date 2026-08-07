@@ -21,6 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
         window.JanSetuVoiceAI.init('btn-voice-mic', 'issue-desc', 'voice-ai-badge', 'voice-ai-translation');
     }
 
+    // Auto pre-fill search query if coming from Home Page Search Bar
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('query') || localStorage.getItem('pendingSearchQuery');
+    if (queryParam && issueDesc) {
+        issueDesc.value = queryParam;
+        localStorage.removeItem('pendingSearchQuery');
+        if (window.JanSetuVoiceAI && window.JanSetuVoiceAI.processTranslationAndAutoForm) {
+            const badge = document.getElementById('voice-ai-badge');
+            const translationText = document.getElementById('voice-ai-translation');
+            window.JanSetuVoiceAI.processTranslationAndAutoForm(queryParam, badge, translationText);
+        }
+    }
+
     function processMediaFile(file) {
         if (!file) return;
 

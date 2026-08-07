@@ -92,19 +92,64 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Voice Search Functionality
+    // Voice Search & Form Navigation Functionality
     const voiceSearchBtn = document.getElementById('voice-search-btn');
     const mainSearchInput = document.getElementById('main-search-input');
+    const searchBtn = document.querySelector('.btn-search');
+    
+    // Keyword Matching & Direct Form Opener
+    async function processSearchQuery(query) {
+        if (!query || query.trim() === '') {
+            alert("⚠️ Please enter or speak a civic complaint query.");
+            return;
+        }
+
+        // Translate Devanagari / Marathi / Hindi text into English
+        let englishText = query;
+        if (window.JanSetuVoiceAI && window.JanSetuVoiceAI.translateToEnglish) {
+            englishText = await window.JanSetuVoiceAI.translateToEnglish(query);
+        }
+
+        const lower = (englishText + ' ' + query).toLowerCase();
+
+        // Check if query contains valid civic keywords
+        const isRoad = lower.includes('road') || lower.includes('pothole') || lower.includes('tar') || lower.includes('traffic') || lower.includes('rasta') || lower.includes('khadda') || lower.includes('gadda');
+        const isWater = lower.includes('water') || lower.includes('leak') || lower.includes('pipe') || lower.includes('drain') || lower.includes('pani') || lower.includes('sewage');
+        const isLight = lower.includes('light') || lower.includes('bulb') || lower.includes('electric') || lower.includes('dark') || lower.includes('diva') || lower.includes('batti');
+        const isGarbage = lower.includes('garbage') || lower.includes('waste') || lower.includes('clean') || lower.includes('trash') || lower.includes('kachra') || lower.includes('ghan');
+        const isPark = lower.includes('tree') || lower.includes('park') || lower.includes('green') || lower.includes('jhad') || lower.includes('aqi');
+
+        if (isRoad || isWater || isLight || isGarbage || isPark) {
+            // Save search intent in localStorage and redirect directly to report form
+            localStorage.setItem('pendingSearchQuery', englishText);
+            alert(`✅ Matching civic category found for: "${englishText}"!\n\nRedirecting directly to the Official Complaint Form...`);
+            window.location.href = `report.html?query=${encodeURIComponent(englishText)}`;
+        } else {
+            // Invalid non-civic query or unrecognized speech
+            alert(`⚠️ Invalid civic issue query: "${query}"\n\nPlease try again with valid keywords like Pothole, Water Leak, Streetlight, Garbage, or Traffic.`);
+        }
+    }
+
+    if (searchBtn && mainSearchInput) {
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            processSearchQuery(mainSearchInput.value);
+        });
+
+        mainSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                processSearchQuery(mainSearchInput.value);
+            }
+        });
+    }
     
     if (voiceSearchBtn && mainSearchInput) {
-        // Check for browser support
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         
         if (SpeechRecognition) {
             const recognition = new SpeechRecognition();
             recognition.continuous = false;
-            // Set language to Hindi (hi-IN) / Marathi (mr-IN)
-            // You can change this to 'mr-IN' if you specifically want Marathi
             recognition.lang = 'hi-IN';
             recognition.interimResults = false;
 
@@ -112,16 +157,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     recognition.start();
                     voiceSearchBtn.classList.add('recording');
-                    mainSearchInput.placeholder = "Listening...";
+                    mainSearchInput.placeholder = "Listening... Speak in Marathi, Hindi, or English";
                 } catch (e) {
                     console.log("Recognition already started");
                 }
             });
 
-            recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript;
-                mainSearchInput.value = transcript;
+            recognition.onresult = async (event) => {
+                const rawTranscript = event.results[0][0].transcript;
                 voiceSearchBtn.classList.remove('recording');
+                mainSearchInput.placeholder = "Translating speech to English...";
+
+                // Convert Marathi/Hindi speech directly to English for search input
+                let englishText = rawTranscript;
+                if (window.JanSetuVoiceAI && window.JanSetuVoiceAI.translateToEnglish) {
+                    englishText = await window.JanSetuVoiceAI.translateToEnglish(rawTranscript);
+                }
+
+                mainSearchInput.value = englishText;
                 mainSearchInput.placeholder = "Search for services, reports, or information...";
             };
 
@@ -129,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Speech recognition error", event.error);
                 voiceSearchBtn.classList.remove('recording');
                 mainSearchInput.placeholder = "Search for services, reports, or information...";
-                alert("Could not recognize voice. Please try again.");
+                alert("Could not recognize voice. Please try again with clear speech.");
             };
 
             recognition.onend = () => {
@@ -137,7 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 mainSearchInput.placeholder = "Search for services, reports, or information...";
             };
         } else {
-            // Browser doesn't support Web Speech API
             voiceSearchBtn.addEventListener('click', () => {
                 alert("Voice search is not supported in this browser. Please use Chrome or Edge.");
             });
