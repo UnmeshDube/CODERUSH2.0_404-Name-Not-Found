@@ -112,12 +112,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const lower = (englishText + ' ' + query).toLowerCase();
 
-        // Check if query contains valid civic keywords
-        const isRoad = lower.includes('road') || lower.includes('pothole') || lower.includes('tar') || lower.includes('traffic') || lower.includes('rasta') || lower.includes('khadda') || lower.includes('gadda');
-        const isWater = lower.includes('water') || lower.includes('leak') || lower.includes('pipe') || lower.includes('drain') || lower.includes('pani') || lower.includes('sewage');
-        const isLight = lower.includes('light') || lower.includes('bulb') || lower.includes('electric') || lower.includes('dark') || lower.includes('diva') || lower.includes('batti');
-        const isGarbage = lower.includes('garbage') || lower.includes('waste') || lower.includes('clean') || lower.includes('trash') || lower.includes('kachra') || lower.includes('ghan');
-        const isPark = lower.includes('tree') || lower.includes('park') || lower.includes('green') || lower.includes('jhad') || lower.includes('aqi');
+        // Check if query contains valid civic keywords (English, Marathi & Hindi - Devanagari + Latin/Hinglish)
+        const isRoad = lower.includes('road') || lower.includes('pothole') || lower.includes('tar') || lower.includes('traffic') || 
+                       lower.includes('rasta') || lower.includes('raste') || lower.includes('khadda') || lower.includes('khadde') || lower.includes('gadda') || lower.includes('gadde') || lower.includes('sadak') || lower.includes('vahatuk') || lower.includes('dambar') || lower.includes('pool') ||
+                       /[\u0900-\u097F]/.test(query) && /रस्ता|रस्ते|खड्डा|खड्डे|सड़क|गड्ढा|गड्ढे|सिमेंट|डांबर|ट्रॅफिक|वाहतूक|पूल|ट्रैफिक|जाम/.test(query);
+
+        const isWater = lower.includes('water') || lower.includes('leak') || lower.includes('pipe') || lower.includes('drain') || lower.includes('sewage') ||
+                        lower.includes('pani') || lower.includes('paani') || lower.includes('galti') || lower.includes('nal') || lower.includes('gatar') || lower.includes('naali') || lower.includes('drainage') || lower.includes('taki') ||
+                        /[\u0900-\u097F]/.test(query) && /पाणी|पानी|गळती|लीकेज|पाईप|नळ|गटार|नाली|ड्रेनेज|सांडपाणी|टाकी|ओवरफ्लो/.test(query);
+
+        const isLight = lower.includes('light') || lower.includes('bulb') || lower.includes('electric') || lower.includes('dark') || 
+                        lower.includes('diva') || lower.includes('dive') || lower.includes('batti') || lower.includes('bijli') || lower.includes('vidyut') || lower.includes('andhar') || lower.includes('andhera') || lower.includes('khamba') || lower.includes('wire') ||
+                        /[\u0900-\u097F]/.test(query) && /लाइट|दिवा|दिवे|बत्ती|बिजली|विद्युत|अंधार|अंधेरा|वायर|खांब|खाम/.test(query);
+
+        const isGarbage = lower.includes('garbage') || lower.includes('waste') || lower.includes('clean') || lower.includes('trash') || 
+                          lower.includes('kachra') || lower.includes('kachara') || lower.includes('ghan') || lower.includes('safai') || lower.includes('kachragadi') || lower.includes('durgandhi') || lower.includes('swachhata') || lower.includes('badboo') ||
+                          /[\u0900-\u097F]/.test(query) && /कचरा|घाण|सफाई|कचरागाडी|दुर्गंधी|प्लास्टिक|कचरापेटी|स्वच्छता|बदबू/.test(query);
+
+        const isPark = lower.includes('tree') || lower.includes('park') || lower.includes('green') || lower.includes('aqi') ||
+                       lower.includes('jhad') || lower.includes('jhade') || lower.includes('ped') || lower.includes('fandi') || lower.includes('baag') || lower.includes('udyan') || lower.includes('pradushan') ||
+                       /[\u0900-\u097F]/.test(query) && /झाड|झाडे|पेड़|फांदी|बाग|उद्यान|हवा|प्रदूषण|झाडी/.test(query);
 
         if (isRoad || isWater || isLight || isGarbage || isPark) {
             // Save search intent in localStorage and redirect directly to report form
@@ -126,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = `report.html?query=${encodeURIComponent(englishText)}`;
         } else {
             // Invalid non-civic query or unrecognized speech
-            alert(`⚠️ Invalid civic issue query: "${query}"\n\nPlease try again with valid keywords like Pothole, Water Leak, Streetlight, Garbage, or Traffic.`);
+            alert(`⚠️ Invalid civic issue query: "${query}"\n\nPlease try again with valid Marathi, Hindi or English keywords (e.g. रस्ता/Pothole, पाणी/Water Leak, लाइट/Streetlight, कचरा/Garbage).`);
         }
     }
 

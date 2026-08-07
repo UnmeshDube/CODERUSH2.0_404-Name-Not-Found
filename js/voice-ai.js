@@ -191,11 +191,11 @@ window.JanSetuVoiceAI = {
     dictionaryFallbackTranslate: function(text) {
         let t = text;
         const dict = [
-            { deba: /खड्डा|गड्ढा|रस्ता|सड़क/gi, en: 'pothole on road' },
-            { deba: /पाणी|पानी|गळती|लीकेज/gi, en: 'water pipeline leakage' },
-            { deba: /लाइट|दिवा|बत्ती|अंधार|अंधेरा/gi, en: 'streetlight not working' },
-            { deba: /कचरा|घाण|सफाई|कचरागाडी/gi, en: 'garbage waste accumulation' },
-            { deba: /झाड|पेड़|फांदी|झाडी/gi, en: 'broken tree branch' }
+            { deba: /रस्ता|रस्ते|खड्डा|खड्डे|सड़क|गड्ढा|गड्ढे|सिमेंट|डांबर|ट्रॅफिक|वाहतूक|पूल|ट्रैफिक|जाम/gi, en: 'road pothole infrastructure issue' },
+            { deba: /पाणी|पानी|गळती|लीकेज|पाईप|नळ|गटार|नाली|ड्रेनेज|सांडपाणी|टाकी|ओवरफ्लो/gi, en: 'water pipeline leakage issue' },
+            { deba: /लाइट|दिवा|दिवे|बत्ती|बिजली|विद्युत|अंधार|अंधेरा|वायर|खांब|खाम/gi, en: 'dark streetlight electricity issue' },
+            { deba: /कचरा|घाण|सफाई|कचरागाडी|दुर्गंधी|प्लास्टिक|कचरापेटी|स्वच्छता|बदबू/gi, en: 'garbage waste sanitation issue' },
+            { deba: /झाड|झाडे|पेड़|फांदी|बाग|उद्यान|हवा|प्रदूषण|झाडी/gi, en: 'tree park environment issue' }
         ];
 
         dict.forEach(item => {
