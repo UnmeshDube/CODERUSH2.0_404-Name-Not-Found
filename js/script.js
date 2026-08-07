@@ -1,6 +1,24 @@
 // Basic interactions for CivicResolve AI Landing Page
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if there is a pending SMS simulation to run
+    try {
+        const pendingSms = localStorage.getItem('pendingNewComplaintSMS');
+        if (pendingSms) {
+            const data = JSON.parse(pendingSms);
+            localStorage.removeItem('pendingNewComplaintSMS');
+            
+            // Wait 1.5 seconds after landing for the popup to show for maximum user visual impact
+            setTimeout(() => {
+                if (window.JanSetuSMS && window.JanSetuSMS.triggerNewComplaint) {
+                    window.JanSetuSMS.triggerNewComplaint(data.phone, data.id, data.category);
+                }
+            }, 1500);
+        }
+    } catch(err) {
+        console.warn("Error running pending SMS simulation:", err);
+    }
+
     // Mobile Menu Toggle
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');

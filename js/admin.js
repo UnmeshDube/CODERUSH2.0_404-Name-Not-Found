@@ -156,7 +156,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ id, status: newStatus })
             });
             if (res.ok) {
-                alert(`✅ Complaint #${id} updated to "${newStatus}"!\nUser logged in with matching phone number will see this live update.`);
+                alert(`✅ Complaint #${id} updated to "${newStatus}"!\nSimulated SMS & WhatsApp push notifications are being sent to the citizen...`);
+                
+                // Lookup report details to send personalized SMS/WhatsApp alert
+                try {
+                    const cached = JSON.parse(localStorage.getItem('civic_reports') || '[]');
+                    const report = cached.find(r => r.id === id);
+                    if (report && window.JanSetuSMS && window.JanSetuSMS.triggerStatusUpdate) {
+                        const eta = report.aiSolution ? report.aiSolution.eta : '12 Hours';
+                        let cat = 'Infrastructure & Roads';
+                        if (report.address.includes('(')) {
+                            cat = report.address.split('(')[1].split(')')[0];
+                        }
+                        window.JanSetuSMS.triggerStatusUpdate(report.phone || '9876543210', id, cat, newStatus, eta);
+                    }
+                } catch (err) {
+                    console.warn("SMS status trigger error", err);
+                }
+
                 lastKnownCount = -1; // force re-render
                 renderFeed();
             }

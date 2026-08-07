@@ -697,6 +697,7 @@
     </footer>
 
     <!-- Custom JS -->
+    <script src="js/notification-simulator.js"></script>
     <script src="js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -750,6 +751,9 @@
             localStorage.setItem('civic_reports', JSON.stringify(reports));
 
             alert('✅ Complaint for "' + subcategory + '" submitted successfully!\nTracking ID: ' + newReport.id);
+            if (window.JanSetuSMS && window.JanSetuSMS.triggerNewComplaint) {
+                window.JanSetuSMS.triggerNewComplaint(newReport.phone, newReport.id, subcategory);
+            }
             closeServiceModal();
             document.getElementById('quick-service-form').reset();
         });

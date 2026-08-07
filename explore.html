@@ -483,6 +483,7 @@
     </footer>
 
     <!-- Custom Map JS -->
+    <script src="js/notification-simulator.js"></script>
     <script src="js/script.js"></script>
     <script src="js/map.js"></script>
     <script>
@@ -538,6 +539,9 @@
                 alert('⚠️ ' + (serverMsg || 'Already uploaded! Added your support to existing complaint.'));
             } else {
                 alert('✅ Complaint submitted successfully!\nPin placed on Nagpur Map.');
+                if (window.JanSetuSMS && window.JanSetuSMS.triggerNewComplaint) {
+                    window.JanSetuSMS.triggerNewComplaint(newReport.phone, newReport.id, category);
+                }
             }
 
             closeExploreModal();

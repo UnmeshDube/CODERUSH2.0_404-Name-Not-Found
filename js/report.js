@@ -228,7 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
         reports.unshift(newReport);
         localStorage.setItem('civic_reports', JSON.stringify(reports));
 
-        alert("Report submitted successfully! The admin portal has been updated in real-time.");
+        // Save notification intent in localStorage to trigger on index.html landing
+        localStorage.setItem('pendingNewComplaintSMS', JSON.stringify({
+            phone: newReport.phone || '9876543210',
+            id: newReport.id,
+            category: newReport.address.includes('Lat:') ? 'GPS Map Placement' : 'Infrastructure & Roads'
+        }));
+
+        alert("Report submitted successfully! Redirecting to see real-time updates and notification status...");
         
         // Redirect back to home to see the admin feed
         window.location.href = 'index.html#admin-portal';
