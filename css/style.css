@@ -569,7 +569,7 @@ footer {
 .footer-bottom p {
     display: inline-block;
     white-space: nowrap;
-    animation: footerMarquee 18s linear infinite;
+    animation: footerMarquee 8s linear infinite;
 }
 
 @keyframes footerMarquee {
