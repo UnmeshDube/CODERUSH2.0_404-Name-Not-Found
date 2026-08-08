@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JanSetu AI - Report a Problem</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="report.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">JanSetu AI | Nagpur Civic Portal</p>
+        <h1>Report a Problem</h1>
+        <p class="hero-copy">Submit a civic issue in four focused steps, starting with photos and moving into AI-assisted location selection inside Nagpur Municipal Corporation boundaries.</p>
+      </div>
+      <div class="hero-chip">
+        <i class="fa-solid fa-shield-heart"></i>
+        Public complaint flow
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="wizard-column">
+        <nav class="step-pills" id="stepPills" aria-label="Report steps"></nav>
+
+        <section class="step-panel active" data-step="1">
+          <div class="panel-header">
+            <h2>Add Photo</h2>
+            <p>Add the issue photo first. A nearby landmark photo helps the AI pre-fill the location.</p>
+          </div>
+
+          <div class="photo-step-status" id="photoStatus">Upload the issue photo to continue.</div>
+
+          <div class="upload-stack">
+            <div class="upload-slot">
+              <div class="upload-slot-head">
+                <div>
+                  <h3>Photo of the Issue</h3>
+                  <p>Required. Show the pothole, garbage, streetlight, or other issue.</p>
+                </div>
+                <span class="required-chip">Required</span>
+              </div>
+              <div class="upload-dropzone" data-dropzone="issue">
+                <input id="issuePhotoInput" type="file" accept="image/*" capture="environment" />
+                <i class="fa-solid fa-camera"></i>
+                <strong>Tap or drop to add image</strong>
+                <span>One clear photo is required</span>
+              </div>
+              <div class="slot-preview" id="issuePhotoPreview"></div>
+            </div>
+
+            <div class="upload-slot">
+              <div class="upload-slot-head">
+                <div>
+                  <h3>Photo of a Nearby Shop, Signboard, or Landmark</h3>
+                  <p>Optional, but helps the AI guess the location.</p>
+                </div>
+                <span class="optional-chip">AI helper</span>
+              </div>
+              <div class="upload-dropzone" data-dropzone="landmark">
+                <input id="landmarkPhotoInput" type="file" accept="image/*" capture="environment" />
+                <i class="fa-solid fa-map-location-dot"></i>
+                <strong>Tap or drop to add landmark photo</strong>
+                <span>Used for location guessing</span>
+              </div>
+              <div class="slot-preview" id="landmarkPhotoPreview"></div>
+              <button id="skipLandmarkBtn" class="skip-link" type="button">Skip landmark photo / I&apos;ll set location manually</button>
+            </div>
+          </div>
+
+          <div class="optional-more">
+            <div class="optional-more-head">
+              <strong>Optional extra photos</strong>
+              <span>Up to 5 images total across the complaint.</span>
+            </div>
+            <div class="optional-more-actions">
+              <button id="extraPhotosTrigger" class="btn btn-secondary" type="button">+ Add more photos</button>
+              <input id="extraPhotosInput" type="file" accept="image/*" multiple capture="environment" hidden />
+            </div>
+            <div id="extraPhotoGrid" class="photo-grid" aria-live="polite"></div>
+          </div>
+
+          <div class="step-actions">
+            <button id="continuePhotoBtn" class="btn btn-primary" type="button" disabled>Continue</button>
+          </div>
+        </section>
+
+        <section class="step-panel" data-step="2">
+          <div class="panel-header panel-header-split">
+            <div>
+              <button class="back-link" type="button" data-step-back="1"><i class="fa-solid fa-chevron-left"></i> Back</button>
+              <h2>Select a Location</h2>
+              <p>Use the AI pre-fill if available, or place the pin manually.</p>
+            </div>
+          </div>
+
+          <div id="aiLocationNotice" class="ai-notice" hidden>
+            <span><i class="fa-solid fa-wand-magic-sparkles"></i> Location guessed from your photo - tap or drag the pin to adjust</span>
+            <button id="dismissAiNoticeBtn" type="button" aria-label="Dismiss location hint">×</button>
+          </div>
+
+          <div class="map-card">
+            <div class="map-toolbar">
+              <div class="map-search autocomplete-wrapper">
+                <label class="sr-only" for="locationSearch">Search for Location or Address</label>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="locationSearch" type="search" placeholder="Search Area, Landmark or Address" autocomplete="off" />
+                <span id="searchSpinner" class="search-spinner" hidden aria-hidden="true">
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+                </span>
+                <button id="searchLocationBtn" type="button">Search</button>
+                <div id="autocompleteResults" class="autocomplete-results" hidden></div>
+              </div>
+            </div>
+
+            <div class="map-frame">
+              <div class="map-control-stack" aria-label="Map controls">
+                <button id="zoomInBtn" type="button" aria-label="Zoom in">+</button>
+                <button id="zoomOutBtn" type="button" aria-label="Zoom out">-</button>
+                <button id="locateBtn" type="button" aria-label="Use my current location">
+                  <i class="fa-solid fa-location-crosshairs"></i>
+                </button>
+              </div>
+              <div id="location-map" class="leaflet-map" aria-label="Map for selecting a location"></div>
+            </div>
+
+            <div class="location-fields">
+              <div class="field">
+                <label for="locationAddressField">Address / Landmark</label>
+                <input id="locationAddressField" type="text" placeholder="AI pre-fill or manual address" />
+              </div>
+              <div class="location-badges">
+                <span id="locationWardBadge" class="badge badge-muted">Ward not set</span>
+                <span id="locationSourceBadge" class="badge badge-muted">Source: manual</span>
+              </div>
+            </div>
+
+            <p class="helper-copy">Search, click, or drag the marker to choose a point. The location must stay inside the Nagpur civic boundary.</p>
+            <div class="map-actions">
+              <button id="confirmLocationBtn" class="btn btn-primary" type="button" disabled>Confirm Location</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="step-panel" data-step="3">
+          <div class="panel-header panel-header-split">
+            <div>
+              <button class="back-link" type="button" data-step-back="2"><i class="fa-solid fa-chevron-left"></i> Back</button>
+              <h2>Select a Request Category</h2>
+              <p>Choose the issue type that best matches your civic complaint.</p>
+            </div>
+          </div>
+
+          <div class="search-card">
+            <label class="sr-only" for="categorySearch">Search for Category</label>
+            <div class="inline-search">
+              <i class="fa-solid fa-filter"></i>
+              <input id="categorySearch" type="search" placeholder="Search for Category" autocomplete="off" />
+            </div>
+          </div>
+
+          <div id="categoryList" class="category-list" role="list"></div>
+
+          <div class="step-actions">
+            <button id="categoryNextBtn" class="btn btn-primary" type="button" disabled>Continue</button>
+          </div>
+        </section>
+
+        <section class="step-panel" data-step="4">
+          <div class="panel-header panel-header-split">
+            <div>
+              <button class="back-link" type="button" data-step-back="3"><i class="fa-solid fa-chevron-left"></i> Back</button>
+              <h2>Enter Details</h2>
+              <p>Share the helpful details that will make this report easier to resolve.</p>
+            </div>
+          </div>
+
+          <div class="details-grid">
+            <div class="field">
+              <label for="descriptionField">Description</label>
+              <textarea id="descriptionField" rows="5" placeholder="Describe the issue in a few clear sentences."></textarea>
+              <p class="field-help">Optional, displayed publicly.</p>
+            </div>
+
+            <div class="guideline-box">
+              <strong>Good civic reports are specific.</strong>
+              <ul>
+                <li>Describe what is broken, blocked, or unsafe.</li>
+                <li>Include landmarks or nearby intersections when useful.</li>
+                <li>Avoid personal data, phone numbers, and private details.</li>
+              </ul>
+            </div>
+
+            <div class="field">
+              <label for="landmarkField">Nearest Address or Landmark</label>
+              <input id="landmarkField" type="text" placeholder="Nearest address or landmark" />
+            </div>
+          </div>
+
+          <div class="step-actions">
+            <button id="submitBtn" class="btn btn-primary" type="button">Submit Request</button>
+          </div>
+        </section>
+
+        <section id="confirmationState" class="confirmation-card" hidden>
+          <div class="confirmation-icon"><i class="fa-solid fa-circle-check"></i></div>
+          <h2>Request submitted</h2>
+          <p>Your report has been prepared locally and assigned a mock reference ID for verification.</p>
+          <div class="reference-pill">
+            <span>Reference ID</span>
+            <strong id="referenceId">JAN-000000</strong>
+          </div>
+          <pre id="submissionSummary" class="submission-summary"></pre>
+        </section>
+      </section>
+
+      <aside class="preview-column">
+        <section id="previewCard" class="preview-card-shell is-open">
+          <button id="previewToggle" class="preview-toggle" type="button" aria-expanded="true">
+            <span>Preview</span>
+            <i class="fa-solid fa-chevron-up"></i>
+          </button>
+          <div class="preview-card">
+            <h3 id="previewTitle">Select a category</h3>
+            <p id="previewAddress" class="text-muted">No location selected</p>
+            <hr class="divider" />
+            <div class="preview-meta">
+              <span id="previewPhotoBadge" class="badge badge-muted">0 photos</span>
+              <span id="previewWardBadge" class="badge badge-muted">Ward not set</span>
+            </div>
+            <div class="preview-footer">
+              <span class="badge badge-public"><i class="fa-regular fa-eye"></i> Public</span>
+              <span class="badge badge-dept"><i class="fa-solid fa-landmark"></i> Nagpur Municipal Corporation</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+  <script src="report.js" defer></script>
+</body>
+</html>

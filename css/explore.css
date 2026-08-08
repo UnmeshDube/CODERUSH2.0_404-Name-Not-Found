@@ -913,14 +913,6 @@
     }
 }
 
-/* Keep the side-by-side desktop explorer layout from 1024px upward. */
-@media (min-width: 1024px) {
-    .wizard-layout { flex-direction: row; }
-    .wizard-column { flex: 0 1 560px; width: auto; }
-    .preview-column { flex: 1 1 auto; width: auto; position: sticky; top: 20px; }
-    .preview-card-container { position: sticky; top: 20px; }
-}
-
 @media (max-width: 768px) {
     .explore-app {
         width: min(100% - 18px, 100%);
@@ -969,58 +961,58 @@
         bottom: 10px;
     }
 
-    .toast {
-        min-width: 0;
-        max-width: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .explore-app {
-        width: calc(100% - 12px);
-        padding-top: 10px;
-    }
-
-    .explore-hero h1 {
-        font-size: 1.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 0.9rem;
-    }
-
-    .hero-badges {
-        gap: 6px;
-    }
-
-    .hero-badge {
-        padding: 6px 10px;
-        font-size: 0.8rem;
-    }
-
-    .stepper {
-        grid-template-columns: 1fr;
-        gap: 6px;
-        padding: 10px 10px 0;
-    }
-
-    .stepper-item {
-        padding: 8px 10px;
-    }
-
-    .step-panel {
-        padding: 12px 10px;
-    }
-
-    .panel-header h2 {
-        font-size: 1.2rem;
-    }
-
-    .wizard-map {
-        height: 300px;
-    }
-
-    .preview-card {
-        padding: 12px;
-    }
-}
+    .toast {\r
+        min-width: 0;\r
+        max-width: none;\r
+    }\r
+}\r
+\r
+@media (max-width: 480px) {\r
+    .explore-app {\r
+        width: calc(100% - 12px);\r
+        padding-top: 10px;\r
+    }\r
+\r
+    .explore-hero h1 {\r
+        font-size: 1.5rem;\r
+    }\r
+\r
+    .hero-subtitle {\r
+        font-size: 0.9rem;\r
+    }\r
+\r
+    .hero-badges {\r
+        gap: 6px;\r
+    }\r
+\r
+    .hero-badge {\r
+        padding: 6px 10px;\r
+        font-size: 0.8rem;\r
+    }\r
+\r
+    .stepper {\r
+        grid-template-columns: 1fr;\r
+        gap: 6px;\r
+        padding: 10px 10px 0;\r
+    }\r
+\r
+    .stepper-item {\r
+        padding: 8px 10px;\r
+    }\r
+\r
+    .step-panel {\r
+        padding: 12px 10px;\r
+    }\r
+\r
+    .panel-header h2 {\r
+        font-size: 1.2rem;\r
+    }\r
+\r
+    .wizard-map {\r
+        height: 300px;\r
+    }\r
+\r
+    .preview-card {\r
+        padding: 12px;\r
+    }\r
+}\r

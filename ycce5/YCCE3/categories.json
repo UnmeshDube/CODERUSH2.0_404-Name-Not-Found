@@ -1,0 +1,98 @@
+[
+  {
+    "id": "abandoned-vehicles",
+    "title": "Abandoned Vehicles",
+    "sourceFile": "311-service-requests-abandoned-vehicles.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "All open abandoned vehicle complaints made to 311 and all requests completed since January 1, 2011. A vehicle can be classified as abandoned if it meets one or more of the following criteria:All open abandoned vehicle complaints made to 311",
+    "sourceTitle": "311 Service Requests - Abandoned Vehicles"
+  },
+  {
+    "id": "alley-lights-out",
+    "title": "Alley Lights Out",
+    "sourceFile": "311-service-requests-alley-lights-out.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Alley Lights Out - Historical"
+  },
+  {
+    "id": "garbage-carts",
+    "title": "Garbage Carts",
+    "sourceFile": "311-service-requests-garbage-carts.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Garbage Carts - Historical"
+  },
+  {
+    "id": "graffiti-removal",
+    "title": "Graffiti Removal",
+    "sourceFile": "311-service-requests-graffiti-removal.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Graffiti Removal - Historical"
+  },
+  {
+    "id": "potholes-and-road-damage",
+    "title": "Potholes & Road Damage",
+    "sourceFile": "311-service-requests-pot-holes-reported.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Pot Holes Reported - Historical"
+  },
+  {
+    "id": "rodent-baiting",
+    "title": "Rodent Baiting",
+    "sourceFile": "311-service-requests-rodent-baiting.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Rodent Baiting - Historical"
+  },
+  {
+    "id": "sanitation-code-complaints",
+    "title": "Sanitation Code Complaints",
+    "sourceFile": "311-service-requests-sanitation-code-complaints.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Sanitation Code Complaints - Historical"
+  },
+  {
+    "id": "street-light-all-out",
+    "title": "Street Light All Out",
+    "sourceFile": "311-service-requests-street-lights-all-out.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Street Lights - All Out - Historical"
+  },
+  {
+    "id": "street-light-one-out",
+    "title": "Street Light One Out",
+    "sourceFile": "311-service-requests-street-lights-one-out.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Street Lights - One Out - Historical"
+  },
+  {
+    "id": "tree-debris",
+    "title": "Tree Debris",
+    "sourceFile": "311-service-requests-tree-debris.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Tree Debris - Historical"
+  },
+  {
+    "id": "tree-trims",
+    "title": "Tree Trims",
+    "sourceFile": "311-service-requests-tree-trims.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Tree Trims - Historical"
+  },
+  {
+    "id": "vacant-and-abandoned-buildings",
+    "title": "Vacant & Abandoned Buildings",
+    "sourceFile": "311-service-requests-vacant-and-abandoned-buildings-reported.csv",
+    "department": "Nagpur Municipal Corporation",
+    "tooltip": "As described in http://bit.ly/311HistoricalPost, the function of this dataset was replaced by https://data.cityofchicago.org/d/v6vf-nfxy. This dataset is historical-only.",
+    "sourceTitle": "311 Service Requests - Vacant and Abandoned Buildings Reported - Historical"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Nagpur Municipal Corporation boundary fallback"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [78.95, 21.02],
+        [79.2, 21.02],
+        [79.2, 21.25],
+        [78.95, 21.25],
+        [78.95, 21.02]
+      ]
+    ]
+  }
+}

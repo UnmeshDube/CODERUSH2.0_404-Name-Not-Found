@@ -114,9 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="feed-content" style="flex-grow: 1;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px;">
-                        <h4 style="margin: 0; color: var(--navy); font-size: 1rem;">ID: ${report.id}</h4>
+                        <h4 style="margin: 0; color: var(--navy); font-size: 1rem;">${report.title || 'Civic Issue'} (ID: ${report.id})</h4>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">${dateStr} at ${timeAgo}</span>
                     </div>
+                    <p style="margin: 0 0 5px 0; font-size: 0.85rem; font-weight: bold; color: #8b5cf6;"><i class="fas fa-tag"></i> ${report.category || 'General'}</p>
                     <p style="margin: 0 0 5px 0; font-size: 0.9rem; font-weight: 600; color: var(--teal);"><i class="fas fa-map-marker-alt"></i> ${report.address}</p>
                     <p style="margin: 0; font-size: 0.9rem; color: var(--text-main);">${report.description || 'No description provided.'}</p>
                     ${report.video ? `<p style="margin: 8px 0 0 0; font-size: 0.85rem;"><a href="${report.video}" target="_blank" rel="noopener" style="color: var(--saffron); font-weight: 600;"><i class="fas fa-video"></i> View video evidence</a></p>` : ''}

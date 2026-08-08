@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Issue - JanSetu AI</title>
+    
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        body {
+            background-color: #f8fafc;
+        }
+        .hub-container {
+            max-width: 900px;
+            margin: 120px auto 60px;
+            padding: 20px;
+            text-align: center;
+        }
+        .hub-title {
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        .hub-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .option-card {
+            background: white;
+            border-radius: 16px;
+            padding: 50px 30px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid transparent;
+        }
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .option-card.voice {
+            border-bottom: 4px solid #2563eb;
+        }
+        .option-card.voice:hover {
+            border-color: #2563eb;
+        }
+        .option-card.text {
+            border-bottom: 4px solid var(--saffron);
+        }
+        .option-card.text:hover {
+            border-color: var(--saffron);
+        }
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .voice .icon-circle {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        .text .icon-circle {
+            background: #fff7ed;
+            color: var(--saffron);
+        }
+        .option-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+        .option-desc {
+            color: var(--text-muted);
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+        .arrow-icon {
+            margin-top: 25px;
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        .voice .arrow-icon { color: #2563eb; }
+        .text .arrow-icon { color: var(--saffron); }
+        .option-card:hover .arrow-icon {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="portal-layout">
+
+    <!-- Navbar -->
+    <nav class="navbar portal-nav" style="background: var(--navy);">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logohack.jpeg" alt="JanSetu AI Logo" class="logo-img">
+                <span class="logo-text" style="color: white;">जनसेतु AI</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" style="color: white; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;"><i class="fas fa-home"></i> Home</a>
+                <a href="explore.html" style="color: white;">Explore Map</a>
+                <a href="about.html" style="color: white;">About Nagpur</a>
+                <div id="google_translate_element" style="margin: 0 10px;"></div>
+                <a href="login.html" class="btn btn-primary">Login</a>
+            </div>
+            <button class="mobile-menu-btn" style="color: white;"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="hub-container">
+        <h1 class="hub-title">Report an Issue</h1>
+        <p class="hub-subtitle">Choose how you would like to submit your civic complaint.</p>
+        
+        <div class="options-grid">
+            <!-- Voice Complaint -->
+            <a href="ycce5/index.html" class="option-card voice">
+                <div class="icon-circle">
+                    <i class="fas fa-microphone"></i>
+                </div>
+                <h3 class="option-title">Voice Complaint</h3>
+                <p class="option-desc">Speak naturally in Marathi, Hindi, or English to report your issue using our advanced Sarvam AI Voice Assistant.</p>
+                <i class="fas fa-arrow-right arrow-icon"></i>
+            </a>
+
+            <!-- Text Complaint -->
+            <a href="YCCE3/report.html" class="option-card text">
+                <div class="icon-circle">
+                    <i class="fas fa-keyboard"></i>
+                </div>
+                <h3 class="option-title">Text Complaint</h3>
+                <p class="option-desc">Fill out a detailed form with photos, precise map location, and specific categories for your civic issue.</p>
+                <i class="fas fa-arrow-right arrow-icon"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi,mr'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

@@ -364,7 +364,8 @@ function renderComplaintsOnMapAndSidebar(map, complaints) {
         
         const popupHtml = `
             <div style="min-width: 200px;">
-                <div class="popup-card-header">ID: ${complaint.id}</div>
+                <div class="popup-card-header">${complaint.title || 'Civic Issue'} (ID: ${complaint.id})</div>
+                <div style="font-size: 0.8rem; font-weight: bold; color: #8b5cf6; margin-bottom: 4px;"><i class="fas fa-tag"></i> ${complaint.category || 'General'}</div>
                 <div class="popup-location-tag"><i class="fas fa-map-marker-alt"></i> ${complaint.address}</div>
                 <div style="font-size: 0.9rem; color: #334155; margin-bottom: 8px;">${complaint.description || 'Civic Issue Reported'}</div>
                 <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 8px; margin-top: 8px;">
@@ -384,9 +385,10 @@ function renderComplaintsOnMapAndSidebar(map, complaints) {
             
             card.innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
-                    <strong style="color: var(--navy); font-size: 0.95rem;">ID: ${complaint.id}</strong>
+                    <strong style="color: var(--navy); font-size: 0.95rem;">${complaint.title || 'Civic Issue'} (ID: ${complaint.id})</strong>
                     ${isUrgent ? '<span style="background: #ef4444; color: white; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 10px;">🔥 URGENT</span>' : ''}
                 </div>
+                <div style="font-size: 0.8rem; font-weight: bold; color: #8b5cf6; margin-bottom: 4px;"><i class="fas fa-tag"></i> ${complaint.category || 'General'}</div>
                 <div style="font-size: 0.85rem; font-weight: 600; color: var(--teal); margin-bottom: 4px;">
                     <i class="fas fa-location-dot"></i> ${complaint.address}
                 </div>

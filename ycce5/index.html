@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Complaint Serum</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f0e8;
+      --panel: #fffaf2;
+      --text: #1e1b18;
+      --muted: #6f665d;
+      --accent: #8f4a1f;
+      --accent-soft: #f1d7c4;
+      --border: #ddc8b6;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #f8f3ec 0%, #efe4d6 100%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(62, 39, 25, 0.08);
+      padding: 24px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+    p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .step-label {
+      font-weight: 700;
+      margin: 18px 0 12px;
+      display: block;
+    }
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .choice {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    }
+    .choice:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+    .choice input {
+      margin-right: 10px;
+    }
+    .choice strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    #recordBtn {
+      background: var(--accent);
+      color: #fff;
+    }
+    #stopBtn {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    #status {
+      margin-top: 16px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    pre {
+      margin-top: 18px;
+      padding: 16px;
+      min-height: 140px;
+      border-radius: 14px;
+      background: #111111;
+      color: #f7f3ee;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .hint {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f0e8;
+        --panel: #fffaf2;
+        --text: #1e1b18;
+        --muted: #6f665d;
+        --accent: #8f4a1f;
+        --accent-soft: #f1d7c4;
+        --border: #ddc8b6;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(180deg, #f8f3ec 0%, #efe4d6 100%);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 32px 20px 40px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        box-shadow: 0 18px 50px rgba(62, 39, 25, 0.08);
+        padding: 24px;
+        margin-bottom: 24px;
+      }
+      h1, h2 {
+        margin: 0 0 10px;
+        font-size: 2rem;
+      }
+      h2 { font-size: 1.5rem; }
+      p {
+        margin: 0 0 18px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .step-label {
+        font-weight: 700;
+        margin: 18px 0 12px;
+        display: block;
+      }
+      .choices {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+      }
+      .choice {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 12px 14px;
+        background: #fff;
+        cursor: pointer;
+        transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+      }
+      .choice:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      }
+      .choice input {
+        margin-right: 10px;
+      }
+      .choice strong {
+        display: block;
+        margin-bottom: 2px;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+      button {
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .btn-primary { background: var(--accent); color: #fff; }
+      .btn-secondary { background: var(--accent-soft); color: var(--text); }
+      #recordBtn { background: var(--accent); color: #fff; }
+      #stopBtn { background: var(--accent-soft); color: var(--text); }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      #status {
+        margin-top: 16px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      pre {
+        margin-top: 18px;
+        padding: 16px;
+        min-height: 140px;
+        border-radius: 14px;
+        background: #111111;
+        color: #f7f3ee;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .hint {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .upload-dropzone {
+        border: 2px dashed var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        background: #fff;
+        cursor: pointer;
+      }
+      .map-frame {
+        width: 100%;
+        height: 350px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        margin-bottom: 12px;
+        position: relative;
+        background: #e0e0e0; /* Fallback color for map */
+      }
+      #location-map { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+      .map-search {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        z-index: 600;
+        display: grid;
+        grid-template-columns: 20px minmax(0, 1fr);
+        gap: 10px;
+        align-items: center;
+        padding: 12px 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+        backdrop-filter: blur(10px);
+      }
+      .map-search input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        outline: none;
+        font-size: 1rem;
+        color: var(--text);
+      }
+      .autocomplete-wrapper {
+        width: auto;
+      }
+      .autocomplete-results {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(100% + 8px);
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 18px 50px rgba(62, 39, 25, 0.08);
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 700;
+      }
+      .autocomplete-item {
+        padding: 12px 14px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        color: var(--text);
+      }
+      .autocomplete-item:hover {
+        background: rgba(37, 99, 235, 0.08);
+      }
+      .autocomplete-item strong {
+        display: block;
+        font-weight: 700;
+      }
+      .autocomplete-item span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .preview-modal {
+        background: #fff; border-radius: 12px; padding: 20px;
+        border: 1px solid var(--border); margin-top: 20px;
+      }
+      .map-control-stack {
+        position: absolute; right: 10px; top: 70px; z-index: 1000;
+        display: flex; flex-direction: column; gap: 5px;
+      }
+      .map-control-stack button {
+        padding: 5px 10px; border-radius: 4px; background: white; border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Voice Complaint Serum</h1>
+        <p>Step 1: Record your complaint using your voice.</p>
+        <div class="choices" id="languageChoices">
+          <label class="choice"><input type="radio" name="languageChoice" value="English" /><strong>English</strong></label>
+          <label class="choice"><input type="radio" name="languageChoice" value="Hindi" /><strong>Hindi</strong></label>
+          <label class="choice"><input type="radio" name="languageChoice" value="Hinglish" /><strong>Hinglish</strong></label>
+          <label class="choice"><input type="radio" name="languageChoice" value="Marathi" /><strong>Marathi</strong></label>
+        </div>
+        <div class="actions">
+          <button id="recordBtn" disabled>Start Recording</button>
+          <button id="stopBtn" disabled>Stop & Upload</button>
+        </div>
+        <div id="status">Select a language to continue.</div>
+        <div id="voice-transcript-container" style="margin-top: 16px; display: none;">
+          <label style="font-weight: 600; display: block; margin-bottom: 8px;">Voice Transcript:</label>
+          <textarea id="voice-transcript-preview" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); box-sizing: border-box; min-height: 80px; resize: vertical;" readonly></textarea>
+        </div>
+      </div>
+
+      <div class="card" id="media-card">
+        <h2>Step 2: Add Photo & Location</h2>
+        <div class="upload-dropzone" id="photoDropzone">
+          <input id="issuePhotoInput" type="file" accept="image/*" capture="environment" hidden />
+          <strong>Tap or drop to add issue photo</strong>
+        </div>
+        <div id="issuePhotoPreview" style="margin-top: 10px; max-height: 200px; overflow: hidden; border-radius: 8px;"></div>
+        
+        <h3 style="margin-top: 20px;">Location</h3>
+        <div class="map-frame">
+          <div class="map-search autocomplete-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="locationSearchInput" type="search" placeholder="Search Area, Landmark or Address" autocomplete="off" />
+            <div id="searchResults" class="autocomplete-results" hidden></div>
+          </div>
+          <div class="map-control-stack">
+            <button id="locateBtn" type="button" title="Get Current Location">📍</button>
+          </div>
+          <div id="location-map"></div>
+        </div>
+        <input type="text" id="locationAddressField" placeholder="Address will appear here..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); box-sizing: border-box;" />
+
+        <div class="actions" style="margin-top: 20px;">
+          <button id="analyzeBtn" class="btn-primary" disabled>Analyze Complaint</button>
+        </div>
+      </div>
+
+      <div class="card preview-modal" id="previewCard" hidden>
+        <h2>Step 3: Preview & Submit</h2>
+        <h3 id="previewHeading"></h3>
+        <p><strong>Category:</strong> <span id="previewCategory"></span></p>
+        <p><strong>Description:</strong> <span id="previewDescription"></span></p>
+        <p><strong>Location:</strong> <span id="previewLocationText"></span></p>
+        
+        <div class="actions">
+          <button id="submitFinalBtn" class="btn-primary">Submit Report</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
