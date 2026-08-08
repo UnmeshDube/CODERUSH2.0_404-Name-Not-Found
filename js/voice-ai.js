@@ -163,7 +163,11 @@ window.JanSetuVoiceAI = {
 
         const self = this;
 
-        micBtn.addEventListener('click', () => {
+        micBtn.addEventListener('click', (event) => {
+            if (event && typeof event.preventDefault === 'function') {
+                event.preventDefault();
+            }
+
             if (self.isListening) {
                 self.stopListening(micBtn);
             } else {
